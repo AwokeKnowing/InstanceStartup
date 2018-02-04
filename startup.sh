@@ -40,9 +40,13 @@ if ! [ -x "/usr/local/bin/nvidia-docker-compose" ]; then
   pip install nvidia-docker-compose
 fi 
 
-########## Setup Alias
+########## Setup Alias and add a group for Docker to run docker w/o sudo
 if ! alias | grep doc; then
-  echo "alias doc='nvidia-docker-compose" >> ~/.bashrc
-  echo "alias docl='doc logs -f --tail=100" >> ~/.bashrc
+  groupadd docker
+  gpasswd -a $USER docker
+  newgrp docker
+  # create alias for doc
+  echo "alias doc='nvidia-docker-compose'" >> ~/.bashrc
+  echo "alias docl='doc logs -f --tail=100'" >> ~/.bashrc
   source ~/.bashrc
 fi
