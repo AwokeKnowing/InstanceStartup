@@ -42,11 +42,14 @@ fi
 
 ########## Setup Alias and add a group for Docker to run docker w/o sudo
 if ! alias | grep doc; then
-  groupadd docker
-  gpasswd -a $USER docker
-  newgrp docker
-  # create alias for doc
+    # create alias for doc
   echo "alias doc='nvidia-docker-compose'" >> ~/.bashrc
   echo "alias docl='doc logs -f --tail=100'" >> ~/.bashrc
   source ~/.bashrc
 fi
+
+
+groupadd docker
+gpasswd -a $USER docker
+newgrp docker
+
