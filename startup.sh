@@ -48,8 +48,6 @@ if ! alias | grep doc; then
   source ~/.bashrc
 fi
 
-
-groupadd docker
-gpasswd -a $USER docker
+sudo usermod -aG docker $USER
 newgrp docker
 
