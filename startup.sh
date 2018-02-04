@@ -25,7 +25,7 @@ if ! dpkg-query -W nvidia-docker; then
 fi
 
 ############ Docker-Compose
-if ! [ -x "/usr/local/bin/docker-compose"]; then 
+if ! [ -x "/usr/local/bin/docker-compose" ]; then 
  curl -L https://github.com/docker/compose/releases/download/1.15.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
   chmod +x /usr/local/bin/docker-compose
 fi
@@ -36,12 +36,13 @@ if ! which pip; then
 fi
 
 ########### nvidia-docker-compose
-if ! [ -x "/home/lstrnad/.local/bin/nvidia-docker-compose" ]; then 
+if ! [ -x "/usr/local/bin/nvidia-docker-compose" ]; then 
   pip install nvidia-docker-compose
 fi 
 
 ########## Setup Alias
 if ! alias | grep doc; then
-  echo "alias doc='nvidia-docker-compose" >> ./bashrc
-  echo "alias docl='doc logs -f --tail=100" >> ./bashrc
+  echo "alias doc='nvidia-docker-compose" >> ~/.bashrc
+  echo "alias docl='doc logs -f --tail=100" >> ~/.bashrc
+  source ~/.bashrc
 fi
